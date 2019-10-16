@@ -11,7 +11,7 @@ c = twint.Config()
 # c.Username = "noneprivacy"
 c.Search = "boulder"
 c.Format = "Tweet: {tweet}"
-c.Limit = 100
+c.Limit = 20
 c.Pandas = True
 
 twint.run.Search(c)
