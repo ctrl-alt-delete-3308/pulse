@@ -1,8 +1,3 @@
-#to install, you will need pip3:
-# pip3 install twint
-# to output search results to textfile:
-# python3 twint_test.py > testText.txt
-
 import twint
 import numpy as np
 
