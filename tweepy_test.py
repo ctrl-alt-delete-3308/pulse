@@ -1,11 +1,12 @@
+#Run with:
+# python3 tweepy_test.py search term here
+#ex: python3 tweepy_test.py cu boulder
+
+import sys
 import re
 import tweepy
 from tweepy import OAuthHandler
 from textblob import TextBlob
-
-import twint
-import numpy as np
-
 
 class TwitterClient(object):
 	# '''
@@ -16,10 +17,10 @@ class TwitterClient(object):
 		# Class constructor or initialization method.
 		# '''
 		# keys and tokens from the Twitter Dev Console
-		consumer_key = 'XXXXXXXXXXXXXXXXXXXXXXXX'
-		consumer_secret = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-		access_token = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-		access_token_secret = 'XXXXXXXXXXXXXXXXXXXXXXXXX'
+		consumer_key = 'bVgAX5fGidoy2IgPKHHgcfOG4'
+		consumer_secret = '83b6zN5HSIjPk7ALaGwcFY9DRwNEvOABgB0YD3TJI4KXigzJY9'
+		access_token = '48478289-5oNed2t3pcbO5aSt5DdeoeoOTfLUePQUYJ96tkkfd'
+		access_token_secret = 'VDOFj9IjC0r5QgbIu1kGgAp68fEwHjKLlhGJkBPFRNbXD'
 
 		# attempt authentication
 		try:
@@ -90,42 +91,53 @@ class TwitterClient(object):
 			# print error (if any)
 			print("Error : " + str(e))
 
-def main():
+def main(argv, argsLen):
 	# creating object of TwitterClient Class
-	# api = TwitterClient()
+	# print("Num args: ", argsLen-1)
+
+	# turn command line arguments to search terms
+
+	if(argsLen <= 1):
+		print("No search term included on the command line!")
+		return
+
+	term = ""
+	for i in range(0, argsLen-1):
+		# print("Arg[",i,"] : ", argv[i])
+		if i != 0:
+			term += " "
+			term += argv[i]
+		else:
+			term += argv[i]
+	print("Searching for: ",term)
+	# print("Searching: ",argv)
+
+	api = TwitterClient()
 	# calling function to get tweets
-
-    # Configure
-    c = twint.Config()
-    # c.Username = "noneprivacy"
-    c.Search = "boulder"
-    c.Format = "Username: {username} |  Tweet: {tweet}"
-    c.Limit = 1
-    c.Pandas = True
-
-    tweets = twint.run.Search(c)
-
+	tweets = api.get_tweets(query = term, count = 2000)
 
 	# picking positive tweets from tweets
-    ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
+	ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
 	# percentage of positive tweets
-    print("Positive tweets percentage: {} %".format(100*len(ptweets)/len(tweets)))
+	print("Positive tweets percentage: {} %".format(100*len(ptweets)/len(tweets)))
 	# picking negative tweets from tweets
-    ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 'negative']
+	ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 'negative']
 	# percentage of negative tweets
-    print("Negative tweets percentage: {} %".format(100*len(ntweets)/len(tweets)))
+	print("Negative tweets percentage: {} %".format(100*len(ntweets)/len(tweets)))
 	# percentage of neutral tweets
-    print("Neutral tweets percentage: {} %".format(100*len(tweets - ntweets - ptweets)/len(tweets)))
+	print("Neutral tweets percentage: {} %".format(100*(len(tweets) - len(ntweets) - len(ptweets))/len(tweets)))
+
 	# printing first 5 positive tweets
-    print("\n\nPositive tweets:")
-    for tweet in ptweets[:10]:
-        print(tweet['text'])
+	# print("\n\nPositive tweets:")
+	# for tweet in ptweets[:10]:
+	# 	print(tweet['text'])
+
 	# printing first 5 negative tweets
-    print("\n\nNegative tweets:")
-    for tweet in ntweets[:10]:
-        print(tweet['text'])
+	# print("\n\nNegative tweets:")
+	# for tweet in ntweets[:10]:
+	# 	print(tweet['text'])
 
 
 if __name__ == "__main__":
-	# calling main function
-    main()
+	# calling main function\
+	main(sys.argv[1:], len(sys.argv))
