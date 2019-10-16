@@ -10,8 +10,8 @@ import numpy as np
 c = twint.Config()
 # c.Username = "noneprivacy"
 c.Search = "boulder"
-c.Format = "Username: {username} |  Tweet: {tweet}"
-c.Limit = 1
+c.Format = "Tweet: {tweet}"
+c.Limit = 100
 c.Pandas = True
 
 twint.run.Search(c)
