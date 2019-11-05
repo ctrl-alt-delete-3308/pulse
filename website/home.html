@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+    <html lang="en">
+<style>
+#grad_background{
+    /* height: 4000px; */
+    min-height: 100%;
+    min-width: 1024px;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: linear-gradient(to top left, #669999 0%, #66ccff 100%)
+}
+.padding-0{
+  padding-right:0;
+  padding-left:0;
+}
+p.margin_sizing {
+  margin-top: 10%;
+}
+.center {
+  margin: auto;
+  width: 30%;
+  border: none;
+  padding: 10px;
+}
+.center2 {
+  margin: auto;
+  width: 28%;
+  border: none;
+  padding: 10px;
+}
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #505356;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  /* color: #000000; */
+  color: #24a0ed;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.modal {
+  background: rgba(000, 000, 000, 0.8);
+  min-height:1000000px;
+}
+
+/* /// */
+</style>
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <title>Pulse</title>
+      </head>
+      <body>
+
+
+        <!-- <div class="text-center">
+        <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">Launch
+        Modal Login Form</a>
+        </div> -->
+        <div id="grad_background">
+          <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <!-- <a href="#">login</a> -->
+            <a href="" data-toggle="modal" data-target="#modalLoginForm">login</a>
+            <a href="create_account.html">sign up</a>
+            <a href="about_pulse.html">about pulse</a>
+            <a href="pulse_team.html">our team</a>
+          </div>
+          <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776</span>
+
+          <script>
+          function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+          }
+
+          function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+          }
+          </script>
+          <!-- login modal -->
+          <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header text-center">
+                  <h4 class="modal-title w-100 font-weight-bold">sign in</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body mx-3">
+                  <div class="md-form mb-5">
+                    <i class="fas fa-envelope prefix grey-text"></i>
+                    <input type="email" id="defaultForm-email" class="form-control validate">
+                    <label data-error="invalid" data-success="valid" for="defaultForm-email">email address</label>
+                  </div>
+
+                  <div class="md-form mb-4">
+                    <i class="fas fa-lock prefix grey-text"></i>
+                    <input type="password" id="defaultForm-pass" class="form-control validate">
+                    <label data-error="invalid" data-success="valid" for="defaultForm-pass">password</label>
+                  </div>
+
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                  <button class="btn btn-default">login</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <p class="margin_sizing"></p>
+            <div class="mx-auto" style="width:85%">
+              <div class="center"><img src="images/logo.png" alt="pulse logo" width="400" height="auto">
+                <div class="row">
+                  <div class="form-group mx-sm-3 mb-2">
+                    <label for="searchTerm" class="sr-only">searchTerm</label>
+                    <input type="search" class="form-control" id="searchTerm" placeholder="Let's explore" width="70">
+                  </div>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary mb-2">Search</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <footer class="page-footer font-small blue">
+
+              <!-- Copyright -->
+              <div class="footer-copyright text-center py-3">© 2019 Copyright:
+                <a href="https://github.com/orgs/ctrl-alt-delete-3308/"> CTRL_ALT_DELETE</a>
+              </div>
+              <!-- Copyright -->
+
+            </footer>
+        </div>
+      </body>
+</html>
