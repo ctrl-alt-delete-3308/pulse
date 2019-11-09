@@ -1,0 +1,9 @@
+
+.card {
+    min-height: 1000px;
+}
+
+.scroll {
+    max-height: 550px;
+    overflow-y: auto;
+}
