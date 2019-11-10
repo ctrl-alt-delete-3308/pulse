@@ -44,6 +44,7 @@ class TwitterClient(object):
 				parsed_tweet = {}
 				parsed_tweet['text'] = tweet.text
 				parsed_tweet['sentiment'] = self.get_tweet_sentiment(tweet.text)
+				parsed_tweet['id'] = tweet.id
 				if tweet.retweet_count > 0:
 					if parsed_tweet not in tweets:
 						tweets.append(parsed_tweet)
@@ -70,28 +71,17 @@ def main(argv, argsLen):
 
 	api = TwitterClient()
 	tweets = api.get_tweets(query = term, count = 10)
-	print("tweets collected: ", len(tweets))
-	# picking positive tweets from tweets
+
 	ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
-	# percentage of positive tweets
 	print("Positive tweets percentage: {} %".format(100*len(ptweets)/len(tweets)))
-	# picking negative tweets from tweets
 	ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 'negative']
-	# percentage of negative tweets
 	print("Negative tweets percentage: {} %".format(100*len(ntweets)/len(tweets)))
-	# percentage of neutral tweets
 	print("Neutral tweets percentage: {} %".format(100*(len(tweets) - len(ntweets) - len(ptweets))/len(tweets)))
 
-	# # printing first 5 positive tweets
-	# print("\n\nPositive tweets:")
-	# for tweet in ptweets[:10]:
-	# 	print(tweet['text'])
-	#
-	# # printing first 5 negative tweets
-	# print("\n\nNegative tweets:")
-	# for tweet in ntweets[:10]:
-		# print(tweet['text'])
-	print(tweets)
+	print("tweets collected: ", len(tweets))
+	for tweet in tweets:
+		print(tweet['id'])
+
 
 if __name__ == "__main__":
 	# calling main function\

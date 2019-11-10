@@ -2,7 +2,6 @@
 body {
   font-family: "Lato", sans-serif;
 }
-
 .padding-0{
   padding-right:0;
   padding-left:0;
@@ -22,7 +21,14 @@ p.margin_sizing {
   border: none;
   padding: 10px;
 }
-
+p.center{
+  text-align: center;
+}
+img.cen {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 .sidenav {
   height: 100%;
   width: 0;

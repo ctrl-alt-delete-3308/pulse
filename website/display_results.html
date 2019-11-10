@@ -12,6 +12,7 @@
         <link href="resources/formatting.css" rel="stylesheet">
         <link href="resources/background.css" rel="stylesheet">
         <link href="resources/scroll_cards.css" rel="stylesheet">
+        <!-- <link href="resources/tweet.css" rel="stylesheet"> -->
         <script src="resources/login.js"></script>
         <script src="resources/search.js"></script>
       </head>
@@ -84,7 +85,37 @@
                 <div class="col-lg-3 scroll">
                   <div class="card bg-light text-dark">
                     <div class="card-header">Twitter</div><div class="card-body">
-                      Results will be displayed here.</div>
+                      <!-- Results will be displayed here. -->
+                      <!-- <a class="twitter-timeline" href="https://twitter.com/TwitterDev/lists/national-parks?ref_src=twsrc%5Etfw">A Twitter List by TwitterDev</a>
+                      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
+                      <div id="tweet" tweetID="1157446287890894848"></div>
+
+                      <script sync src="https://platform.twitter.com/widgets.js"></script>
+
+                      <script>
+
+                      window.onload = (function(){
+
+                      var tweet = document.getElementById("tweet");
+                      var id = tweet.getAttribute("tweetID");
+
+                      twttr.widgets.createTweet(
+                        id, tweet,
+                        {
+                          conversation : 'none',    // or all
+                          cards        : 'hidden',  // or visible
+                          linkColor    : '#cc0000', // default is blue
+                          theme        : 'light'    // or dark
+                        })
+                      .then (function (el) {
+                        el.contentDocument.querySelector(".footer").style.display = "none";
+                      });
+
+                      });
+
+                      </script>
+
+                      </div>
                       </div>
                 </div>
 
@@ -105,7 +136,9 @@
                 <div class="col-lg-3 scroll">
                   <div class="card bg-light text-dark">
                     <div class="card-header">Analytics</div><div class="card-body">
-                      Results will be displayed here.</div>
+                      Results will be displayed here.
+                      </div>
+
                       </div>
                 </div>
                 </div>
