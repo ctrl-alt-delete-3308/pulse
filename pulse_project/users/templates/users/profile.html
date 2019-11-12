@@ -1,0 +1,55 @@
+{% extends "pulse_search/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<title>Pulse Account</title>
+<div class="mx-auto" style="width:60%">
+  <!-- centering logo -->
+  <div class="mx-auto" style="width:28%"><img src="http://127.0.0.1:8000/media/logo.png" alt="pulse logo" width="300" height="auto"></div>
+    <div class="mx-auto" style="width:21%">
+    <p style = "font-family:allerta; font-size:26px;">
+       <font color="505356">account overview</font>
+    </p></div>
+      <!-- my account form-->
+      <form class="border border-light p-5">
+        <p class="h4 mb-4 text-center">
+          <font color="505356">My Account</font>
+        </p>
+        <div class="mx-auto" style="width:60%">
+        <table class="table">
+          <tr>
+            <th>Username</th>
+            <td> {{ user.username }}</td>
+          </tr>
+          <tr>
+            <th>Email</th>
+            <td> {{ user.email }}</td>
+          </tr>
+        </table>
+        {% if searches %}
+          <br><br>
+          <table class="table">
+          {% for search in searchs %}
+            <tr>
+              <th>Search Term</th>
+              <td> {{ search.term }}</td>
+            </tr>
+            <tr>
+              <th>Positive</th>
+              <td> {{ search.term }}</td>
+            </tr>
+            <tr>
+              <th>Negative</th>
+              <td> {{ search.term }}</td>
+            </tr>
+            <tr>
+              <th>Neutral</th>
+              <td> {{ search.term }}</td>
+            </tr>
+          {% endfor %}
+          </table>
+        {% endif %}
+      <!-- CREATE LIST OF RECENT SEARCHES -->
+      </div>
+      </form>
+{% endblock content %}

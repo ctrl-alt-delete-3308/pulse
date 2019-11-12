@@ -8,20 +8,26 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <title>About Pulse</title>
+        <title>Pulse</title>
         <link href="resources/formatting.css" rel="stylesheet">
         <link href="resources/background.css" rel="stylesheet">
         <script src="resources/login.js"></script>
+        <script src="resources/search.js"></script>
       </head>
       <body>
-        <link href="resources/formatting.css" rel="stylesheet">
+
+
+        <!-- <div class="text-center">
+        <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">Launch
+        Modal Login Form</a>
+        </div> -->
         <div id="grad_background">
           <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a href="home.html">home</a>
             <a href="my_account.html">account</a>
             <a href="" data-toggle="modal" data-target="#modalLoginForm">login</a>
             <a href="create_account.html">sign up</a>
+            <a href="about_pulse.html">about pulse</a>
             <a href="pulse_team.html">our team</a>
           </div>
           <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776</span>
@@ -35,7 +41,6 @@
             document.getElementById("mySidenav").style.width = "0";
           }
           </script>
-
           <!-- login modal -->
           <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
             <div class="modal-dialog" role="document">
@@ -66,20 +71,32 @@
               </div>
             </div>
           </div>
-          <!-- <div class="mx-auto" style="width:98%"> -->
-              <p class = "center" style = "font-family:allerta; font-size:26px;">
-                <img src="images/logo.png" alt="pulse logo" width="300" height="auto"><br><p>
-                <div class="mx-auto" style="width:50%">
-                <p style = "font-family:allerta; font-size:26px;">
-                <font color="505356">
-                  At Pulse we believe that social media has become the ultimate marketing tool and we are here
-                  to make accessing that data <strong>faster</strong> and <strong>easier</strong>. With one simple
-                  search, you are able to see recent results from top social media platforms such as Twitter,
-                  Reddit and YouTube. We even analyize post for you! <strong>Demystifying the chaos of public opion has
-                  never been easier than with Pulse.</strong>
-                  </font></p>
-          </div>
-              <img src="images/about_pulse_graphic.png" alt="machine learning graphic" width="600" class="cen">
-          </div></p>
+
+
+
+          <p class="margin_sizing"></p>
+            <div class="mx-auto" style="width:85%">
+              <div class="center"><img src="images/logo.png" alt="pulse logo" width="400" height="auto">
+                <div class="row">
+                  <div class="form-group mx-sm-3 mb-2">
+                    <label for="searchTerm" class="sr-only">searchTerm</label>
+                    <input type="search" class="form-control" id="searchTerm" placeholder="Let's explore" width="70">
+                  </div>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary mb-2" onclick="searching()">Search</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <footer class="page-footer font-small blue">
+
+              <!-- Copyright -->
+              <div class="footer-copyright text-center py-3">© 2019 Copyright:
+                <a href="https://github.com/orgs/ctrl-alt-delete-3308/"> CTRL_ALT_DELETE</a>
+              </div>
+              <!-- Copyright -->
+
+            </footer>
+        </div>
       </body>
 </html>

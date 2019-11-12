@@ -1,0 +1,22 @@
+{% extends "pulse_search/base.html" %}
+{% load static %}
+{% block content %}
+<title>Pulse Log Out</title>
+<!-- centering -->
+<link rel="stylesheet" type="text/css" href="{% static 'pulse_search/scroll_card.css' %}">
+  <!-- centering logo -->
+  <div class="mx-auto" style="width:80%"><p class="h4 mb-4 text-center">
+    <img src="http://127.0.0.1:8000/media/logo.png" alt="pulse logo" width="300" height="auto">
+  </p>  </div>
+  <div class="mx-auto" style="width:30%">
+  <div class = "content-section">
+    <p class="h4 mb-4 text-center">
+      <font color="505356">you have been logged out</font>
+    </p>
+      <div class ="border-top pt-3">
+        <small class="text-muted">
+          Want back input? <a href="{% url 'login' %}">Log In</a>
+        </small>
+      </div>
+    </div>
+{% endblock content %}

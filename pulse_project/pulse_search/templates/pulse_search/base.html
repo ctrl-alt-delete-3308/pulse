@@ -1,0 +1,75 @@
+{% load static %}
+<script>
+function searched(){
+}
+</script>
+<!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <!-- <link href="resources/formatting.css" rel="stylesheet"> -->
+        <!-- <link href="resources/formatting.css" rel="stylesheet"> -->
+        <!-- <link href="resources/background.css" rel="stylesheet"> -->
+        <!-- <script src="resources/login.js"></script> -->
+        <script src="{% static 'pulse_search/scriptage.js' %}"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'pulse_search/main.css' %}">
+      </head>
+      <body>
+
+        <div id="grad_background">
+          <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+            <a href="{% url 'pulse-home' %}">home</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'profile' %}">account</a>
+            <a href="{% url 'logout' %}">logout</a>
+            {% else %}
+            <a href="{% url 'login' %}">login</a>
+            <a href="{% url 'register' %}">sign up</a>
+            {% endif %}
+            <!-- #NOT DONE -->
+            <a href="{% url 'pulse-about' %}">about pulse</a>
+            <a href="{% url 'pulse-team' %}">our team</a>
+            {% if user.username == 'rhetthanscom' %}
+              <a href="http://localhost:8000/admin/">admin</a>
+            {% endif %}
+          </div>
+          <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776</span>
+
+          <script>
+          function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+          }
+
+          function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+          }
+          </script>
+
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-success">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif%}
+          {% block content %}{% endblock %}
+
+            <footer class="page-footer font-small blue">
+
+              <!-- Copyright -->
+              <div class="footer-copyright text-center py-3">© 2019 Copyright:
+                <a href="https://github.com/orgs/ctrl-alt-delete-3308/"> CTRL_ALT_DELETE</a>
+              </div>
+              <!-- Copyright -->
+
+            </footer>
+        </div>
+      </body>
+</html>

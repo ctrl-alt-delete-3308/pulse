@@ -1,0 +1,221 @@
+
+
+
+
+{% extends "pulse_search/base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'pulse_search/scroll_card.css' %}">
+<title>Pulse Search</title>
+            <div class="mx-auto" style="width:98%">
+              <div class="mx-auto" style="width:20%"><img src="http://127.0.0.1:8000/media/logo.png" alt="pulse logo" width="300" height="auto"></div>
+              <!-- <div class="center"><img src="images/logo.png" alt="pulse logo" width="300" height="auto"> -->
+              <div class="mx-auto" style="width:25%">
+                <p style = "font-family:allerta; font-size:26px;" id="p_search">
+                   <font color="505356">showing results for 'search_term'</font>
+                </p></div>
+                <script>
+                var seach_term = ParseURLParameter("term");
+                </script>
+                <div class="row">
+                <div class="col-lg-3 scroll">
+                  <div class="card bg-light text-dark">
+                    <div class="card-header">Twitter</div><div class="card-body">
+<script>var j = 1; </script>
+<body>
+  {% for tweet in tweets_dict %}
+    <div id="tweet{{tweet.index}}" tweetID={{tweet.id}}></div>
+  {% endfor %}
+  <script sync src="https://platform.twitter.com/widgets.js"></script>
+  <script sync src="https://platform.twitter.com/widgets.js"></script>
+
+  <script>
+
+  window.onload = (function(){
+  var tweet1 = document.getElementById("tweet1");
+  var id1 = tweet1.getAttribute("tweetID");
+  var tweet2 = document.getElementById("tweet2");
+  var id2 = tweet2.getAttribute("tweetID");
+  var tweet3 = document.getElementById("tweet3");
+  var id3 = tweet3.getAttribute("tweetID");
+  var tweet4 = document.getElementById("tweet4");
+  var id4 = tweet4.getAttribute("tweetID");
+  var tweet5 = document.getElementById("tweet5");
+  var id5 = tweet5.getAttribute("tweetID");
+  var tweet6 = document.getElementById("tweet6");
+  var id6 = tweet6.getAttribute("tweetID");
+  var tweet7 = document.getElementById("tweet7");
+  var id7 = tweet7.getAttribute("tweetID");
+  var tweet8 = document.getElementById("tweet8");
+  var id8 = tweet8.getAttribute("tweetID");
+  var tweet9 = document.getElementById("tweet9");
+  var id9 = tweet9.getAttribute("tweetID");
+  var tweet10 = document.getElementById("tweet10");
+  var id10 = tweet10.getAttribute("tweetID");
+  twttr.widgets.createTweet(
+    id1, tweet1,
+    {
+      conversation : 'none',
+      cards        : 'hidden',
+      linkColor    : '#cc0000',
+      theme        : 'light'
+    })
+  twttr.widgets.createTweet(
+    id2, tweet2,
+    {
+      conversation : 'none',
+      cards        : 'hidden',
+      linkColor    : '#cc0000',
+      theme        : 'light'
+    })
+  twttr.widgets.createTweet(
+    id3, tweet3,
+    {
+      conversation : 'none',
+      cards        : 'hidden',
+      linkColor    : '#cc0000',
+      theme        : 'light'
+    })
+  twttr.widgets.createTweet(
+    id4, tweet4,
+    {
+      conversation : 'none',
+      cards        : 'hidden',
+      linkColor    : '#cc0000',
+      theme        : 'light'
+    })
+  twttr.widgets.createTweet(
+    id5, tweet5,
+    {
+      conversation : 'none',
+      cards        : 'hidden',
+      linkColor    : '#cc0000',
+      theme        : 'light'
+    })
+  twttr.widgets.createTweet(
+    id6, tweet6,
+    {
+      conversation : 'none',
+      cards        : 'hidden',
+      linkColor    : '#cc0000',
+      theme        : 'light'
+    })
+  twttr.widgets.createTweet(
+    id7, tweet7,
+    {
+      conversation : 'none',
+      cards        : 'hidden',
+      linkColor    : '#cc0000',
+      theme        : 'light'
+    })
+  twttr.widgets.createTweet(
+    id8, tweet8,
+    {
+      conversation : 'none',
+      cards        : 'hidden',
+      linkColor    : '#cc0000',
+      theme        : 'light'
+    })
+  twttr.widgets.createTweet(
+    id9, tweet9,
+    {
+      conversation : 'none',
+      cards        : 'hidden',
+      linkColor    : '#cc0000',
+      theme        : 'light'
+    })
+  twttr.widgets.createTweet(
+    id10, tweet10,
+    {
+      conversation : 'none',
+      cards        : 'hidden',
+      linkColor    : '#cc0000',
+      theme        : 'light'
+    })
+
+  });
+  </script>
+
+
+                      </div>
+                      </div>
+                </div>
+
+                <div class="col-lg-3 scroll">
+                  <div class="card bg-light text-dark">
+                    <div class="card-header">Reddit</div><div class="card-body">
+                      <script src='https://redditjs.com/post.js' data-url='http://www.reddit.com/r/technology/comments/2m2yl7/its_now_official_humanity_has_landed_a_probe_on_a/' data-height='250' data-width='400' data-post-finder='mostComments' data-theme='light' data-show-submit='true'></script>
+
+                      <script src='https://redditjs.com/post.js' data-url='https://www.reddit.com/r/news/comments/durw8g/marijuana_banned_from_chicago_public_housing/?utm_source=share&utm_medium=web2x' data-height='330' data-width='400' data-post-finder='mostComments' data-theme='light' data-show-submit='true'></script>
+                      <script src='https://redditjs.com/post.js' data-url='http://www.techodrom.com/etc/star-trek-edges-closer-reality-tractor-beam-moves-object-using-nothing-power-ultrasound/' data-height='330' data-width='400' data-post-finder='mostComments' data-theme='light' data-show-submit='true'></script>
+                      <script src='https://redditjs.com/post.js' data-url='http://www.techodrom.com/etc/star-trek-edges-closer-reality-tractor-beam-moves-object-using-nothing-power-ultrasound/' data-height='330' data-width='400' data-post-finder='mostComments' data-theme='light' data-show-submit='true'></script>
+                      <script src='https://redditjs.com/post.js' data-url='http://www.techodrom.com/etc/star-trek-edges-closer-reality-tractor-beam-moves-object-using-nothing-power-ultrasound/' data-height='330' data-width='400' data-post-finder='mostComments' data-theme='light' data-show-submit='true'></script>
+                      <script src='https://redditjs.com/post.js' data-url='http://www.techodrom.com/etc/star-trek-edges-closer-reality-tractor-beam-moves-object-using-nothing-power-ultrasound/' data-height='330' data-width='400' data-post-finder='mostComments' data-theme='light' data-show-submit='true'></script>
+                      <script src='https://redditjs.com/post.js' data-url='http://www.techodrom.com/etc/star-trek-edges-closer-reality-tractor-beam-moves-object-using-nothing-power-ultrasound/' data-height='330' data-width='400' data-post-finder='mostComments' data-theme='light' data-show-submit='true'></script>
+                      <script src='https://redditjs.com/post.js' data-url='http://www.techodrom.com/etc/star-trek-edges-closer-reality-tractor-beam-moves-object-using-nothing-power-ultrasound/' data-height='330' data-width='400' data-post-finder='mostComments' data-theme='light' data-show-submit='true'></script>
+                      <script src='https://redditjs.com/post.js' data-url='http://www.techodrom.com/etc/star-trek-edges-closer-reality-tractor-beam-moves-object-using-nothing-power-ultrasound/' data-height='330' data-width='400' data-post-finder='mostComments' data-theme='light' data-show-submit='true'></script>
+                      <script src='https://redditjs.com/post.js' data-url='http://www.techodrom.com/etc/star-trek-edges-closer-reality-tractor-beam-moves-object-using-nothing-power-ultrasound/' data-height='330' data-width='400' data-post-finder='mostComments' data-theme='light' data-show-submit='true'></script>
+
+                    </div>
+                      </div>
+                </div>
+
+                <div class="col-lg-3 scroll">
+                  <div class="card bg-light text-dark">
+                    <div class="card-header">YouTube</div><div class="card-body">
+                      <iframe width="400" height="300" src="https://www.youtube.com/embed/pTW1-NBILiY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      <br>
+                      <iframe width="400" height="300" src="https://www.youtube.com/embed/-zP68LagUzY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      <br>
+                      <iframe width="400" height="300" src="https://www.youtube.com/embed/38hMYtaCINI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      <br>
+                      <iframe width="400" height="300" src="https://www.youtube.com/embed/YzhSyAb_2Uc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      <br>
+                      <iframe width="400" height="300" src="https://www.youtube.com/embed/5texwfuSkT4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      <br>
+                    </div>
+                      </div>
+                </div>
+
+                <div class="col-lg-3 scroll">
+                  <div class="card bg-light text-dark">
+                    <div class="card-header">Analytics</div><div class="card-body">
+                      <img src="https://lh3.googleusercontent.com/g0Jw-I6-gH2DVCpnl3u8QKZVT_meR9lcJlpyeSZ-MyvwLnyEZvgyrY5frldA8HCv55s=w280" alt="pie chart" width="400" height="auto">
+                      <table class="table">
+                        <tr>
+                          <th>Positive</th>
+                          <td> 61.2 %</td>
+                        </tr>
+                        <tr>
+                          <th>Negative</th>
+                          <td> 18.5 %</td>
+                        </tr>
+                        <tr>
+                          <th>Neutral</th>
+                          <td> 20.3 %</td>
+                        </tr>
+                      </table>
+                      <br><br>
+                      <img src="https://lh3.googleusercontent.com/g0Jw-I6-gH2DVCpnl3u8QKZVT_meR9lcJlpyeSZ-MyvwLnyEZvgyrY5frldA8HCv55s=w280" alt="pie chart" width="400" height="auto">
+                      <table class="table">
+                        <tr>
+                          <th>Positive</th>
+                          <td> 61.2 %</td>
+                        </tr>
+                        <tr>
+                          <th>Negative</th>
+                          <td> 18.5 %</td>
+                        </tr>
+                        <tr>
+                          <th>Neutral</th>
+                          <td> 20.3 %</td>
+                        </tr>
+                      </table>
+
+                      </div>
+
+                      </div>
+                </div>
+                </div>
+            </div>
+{% endblock content %}
