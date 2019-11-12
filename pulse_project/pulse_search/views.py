@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Search
 from django.db.models import Q
@@ -9,6 +9,14 @@ from . import twitter_search
 # Create your views here.
 
 def home(request):
+    if request.method == 'POST':
+        if request.POST.get('searchTerm'):
+            search = Search()
+            search.term = request.POST.get('searchTerm')
+            search.author = request.user #need to update this asap
+            search.save()
+            return redirect('pulse-results')
+
     return render(request, 'pulse_search/home.html')
 
 def about(request):
@@ -22,15 +30,19 @@ def display_results(request):
     # search_term = Search.objects.all(username = user.username).first()???
     #retrieve latest search term from user account
     #run through relavent programs to create a dict of dicts, i.e.:
-    # twitter_dict = twitter_search.my_function()
+    # duck_duck_goose = twitter_search.main(search_term)
+    # print(duck_duck_goose)
     # context ={
     #     'tweets_dict' : tweets_dict,
     #     'video_dict' : video_dict,
     #     'reddit_dict' : reddit_dict
     # }
     #finally pass into the render request
-
-    context = {'tweets_dict' : twitter_search.tweets_dict}
+    search_term = Search.objects.last()
+    print(search_term)
+    display_name = {'name' : search_term}
+    context = {'tweets_dict' : twitter_search.main(search_term),
+                'display_name' : display_name }
     #to pull from the database
     # context = {'tweets_dict' : Search.objects.all()}
     return render(request, 'pulse_search/display_results.html', context)

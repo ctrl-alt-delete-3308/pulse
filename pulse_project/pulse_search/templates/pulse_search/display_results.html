@@ -12,7 +12,11 @@
               <!-- <div class="center"><img src="images/logo.png" alt="pulse logo" width="300" height="auto"> -->
               <div class="mx-auto" style="width:25%">
                 <p style = "font-family:allerta; font-size:26px;" id="p_search">
-                   <font color="505356">showing results for 'search_term'</font>
+                     {% if display_name %}
+                        <font color="505356"> searched for '{{ display_name.name }}'</font>
+                    {% else %}
+                      <font color="505356"> searched for 'search_term'</font>
+                    {% endif%}
                 </p></div>
                 <script>
                 var seach_term = ParseURLParameter("term");
