@@ -7,8 +7,10 @@
     }
   </script>
           <p class="margin_sizing"></p>
-            <div class="mx-auto" style="width:85%">
-              <div class="center"><img src="http://127.0.0.1:8000/media/logo.png" alt="pulse logo" width="400" height="auto">
+            <div class="mx-auto" style="width:98%">
+              <!-- <div class="center"> -->
+              <p class = "center">
+              <img src="http://127.0.0.1:8000/media/logo.png" alt="pulse logo" width="400" height="auto"> </p>
                 <div class="row">
                   <!-- <div class="form-group mx-sm-3 mb-2">
                     <label for="searchTerm" class="sr-only">searchTerm</label>
@@ -17,13 +19,24 @@
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary mb-2" onclick="clicked()">Search</button>
                   </div> -->
+                  {% if user.is_authenticated %}
+                  <div class="mx-auto" style="width:30%">
                   <form action="" method="POST">
                       {% csrf_token %}
                       <input type="text" name="searchTerm"/><br/>
                       <input type="submit" value="Search"/>
                   </form>
                   </div>
-                </div>
+                  {% else %}
+                  <p class = "center" style = "font-family:allerta; font-size:26px;">
+                    <font color="505356">
+                      please sign in to begin a search
+                    </font>
+                  </p>
+
+                  {% endif %}
+
+                  </div>
+                <!-- </div> -->
               </div>
-            </div>
 {% endblock content %}
