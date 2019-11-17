@@ -2,6 +2,7 @@
 {% extends "pulse_search/base.html" %}
 {% load static %}
 {% block content %}
+<script src='https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js'></script>
 <link rel="stylesheet" type="text/css" href="{% static 'pulse_search/scroll_card.css' %}">
 <title>Pulse Search</title>
 <div class="mx-auto" style="width:98%">
@@ -9,8 +10,8 @@
       <img src="http://127.0.0.1:8000/media/logo.png" alt="pulse logo" width="300" height="auto">
     </p>
     <p class = "center" style = "font-family:allerta; font-size:26px;">
-             {% if display_name %}
-                <font color="505356"> searched for '{{ display_name.name }}'</font>
+             {% if searched_term %}
+                <font color="505356"> searched for '{{ searched_term.term }}'</font>
             {% else %}
               <font color="505356"> searched for 'search_term'</font>
             {% endif%}
@@ -31,106 +32,18 @@
   <script>
 
   window.onload = (function(){
-  var tweet1 = document.getElementById("tweet1");
-  var id1 = tweet1.getAttribute("tweetID");
-  var tweet2 = document.getElementById("tweet2");
-  var id2 = tweet2.getAttribute("tweetID");
-  var tweet3 = document.getElementById("tweet3");
-  var id3 = tweet3.getAttribute("tweetID");
-  var tweet4 = document.getElementById("tweet4");
-  var id4 = tweet4.getAttribute("tweetID");
-  var tweet5 = document.getElementById("tweet5");
-  var id5 = tweet5.getAttribute("tweetID");
-  var tweet6 = document.getElementById("tweet6");
-  var id6 = tweet6.getAttribute("tweetID");
-  var tweet7 = document.getElementById("tweet7");
-  var id7 = tweet7.getAttribute("tweetID");
-  var tweet8 = document.getElementById("tweet8");
-  var id8 = tweet8.getAttribute("tweetID");
-  var tweet9 = document.getElementById("tweet9");
-  var id9 = tweet9.getAttribute("tweetID");
-  var tweet10 = document.getElementById("tweet10");
-  var id10 = tweet10.getAttribute("tweetID");
-  twttr.widgets.createTweet(
-    id1, tweet1,
-    {
-      conversation : 'none',
-      cards        : 'hidden',
-      linkColor    : '#cc0000',
-      theme        : 'light'
-    })
-  twttr.widgets.createTweet(
-    id2, tweet2,
-    {
-      conversation : 'none',
-      cards        : 'hidden',
-      linkColor    : '#cc0000',
-      theme        : 'light'
-    })
-  twttr.widgets.createTweet(
-    id3, tweet3,
-    {
-      conversation : 'none',
-      cards        : 'hidden',
-      linkColor    : '#cc0000',
-      theme        : 'light'
-    })
-  twttr.widgets.createTweet(
-    id4, tweet4,
-    {
-      conversation : 'none',
-      cards        : 'hidden',
-      linkColor    : '#cc0000',
-      theme        : 'light'
-    })
-  twttr.widgets.createTweet(
-    id5, tweet5,
-    {
-      conversation : 'none',
-      cards        : 'hidden',
-      linkColor    : '#cc0000',
-      theme        : 'light'
-    })
-  twttr.widgets.createTweet(
-    id6, tweet6,
-    {
-      conversation : 'none',
-      cards        : 'hidden',
-      linkColor    : '#cc0000',
-      theme        : 'light'
-    })
-  twttr.widgets.createTweet(
-    id7, tweet7,
-    {
-      conversation : 'none',
-      cards        : 'hidden',
-      linkColor    : '#cc0000',
-      theme        : 'light'
-    })
-  twttr.widgets.createTweet(
-    id8, tweet8,
-    {
-      conversation : 'none',
-      cards        : 'hidden',
-      linkColor    : '#cc0000',
-      theme        : 'light'
-    })
-  twttr.widgets.createTweet(
-    id9, tweet9,
-    {
-      conversation : 'none',
-      cards        : 'hidden',
-      linkColor    : '#cc0000',
-      theme        : 'light'
-    })
-  twttr.widgets.createTweet(
-    id10, tweet10,
-    {
-      conversation : 'none',
-      cards        : 'hidden',
-      linkColor    : '#cc0000',
-      theme        : 'light'
-    })
+    {% for tweet in tweets_dict %}
+      var tweet{{tweet.index}} = document.getElementById("tweet{{tweet.index}}");
+      var id{{tweet.index}} = tweet{{tweet.index}}.getAttribute("tweetID");
+      twttr.widgets.createTweet(
+        id{{tweet.index}}, tweet{{tweet.index}},
+        {
+          conversation : 'none',
+          cards        : 'hidden',
+          linkColor    : '#cc0000',
+          theme        : 'light'
+        })
+    {% endfor %}
 
   });
   </script>
@@ -184,38 +97,50 @@
                 <div class="col-lg-3 scroll">
                   <div class="card bg-light text-dark">
                     <div class="card-header">Analytics</div><div class="card-body">
-                      <img src="https://lh3.googleusercontent.com/g0Jw-I6-gH2DVCpnl3u8QKZVT_meR9lcJlpyeSZ-MyvwLnyEZvgyrY5frldA8HCv55s=w280" alt="pie chart" width="400" height="auto">
-                      <table class="table">
-                        <tr>
-                          <th>Positive</th>
-                          <td> 61.2 %</td>
-                        </tr>
-                        <tr>
-                          <th>Negative</th>
-                          <td> 18.5 %</td>
-                        </tr>
-                        <tr>
-                          <th>Neutral</th>
-                          <td> 20.3 %</td>
-                        </tr>
-                      </table>
-                      <br><br>
-                      <img src="https://lh3.googleusercontent.com/g0Jw-I6-gH2DVCpnl3u8QKZVT_meR9lcJlpyeSZ-MyvwLnyEZvgyrY5frldA8HCv55s=w280" alt="pie chart" width="400" height="auto">
-                      <table class="table">
-                        <tr>
-                          <th>Positive</th>
-                          <td> 61.2 %</td>
-                        </tr>
-                        <tr>
-                          <th>Negative</th>
-                          <td> 18.5 %</td>
-                        </tr>
-                        <tr>
-                          <th>Neutral</th>
-                          <td> 20.3 %</td>
-                        </tr>
-                      </table>
-
+                      <!-- <img src="https://lh3.googleusercontent.com/g0Jw-I6-gH2DVCpnl3u8QKZVT_meR9lcJlpyeSZ-MyvwLnyEZvgyrY5frldA8HCv55s=w280" alt="pie chart" width="400" height="auto"> -->
+                      {% if sentiment_dict %}
+                        <canvas id="pie-chart" width="400" height="200"></canvas>
+                        <script>
+                              new Chart(document.getElementById("pie-chart"), {
+                              type: 'pie',
+                              data: {
+                                labels: ["Positive", "Negative", "Neutral"],
+                                datasets: [{
+                                  label: "Tweet Sentiment",
+                                  backgroundColor: ["#3e95cd","#c45850","#aab7b8"],
+                                  data: [{{sentiment_dict.positive}},
+                                        {{sentiment_dict.negative}},
+                                        {{ sentiment_dict.neutral }}]
+                                }]
+                              },
+                              options: {
+                                title: {
+                                  display: true,
+                                  text: 'Tweet Sentiment Analysis'
+                                }
+                              }
+                          });
+                        </script>
+                        <table class="table">
+                          <font color="505356">
+                          <tr>
+                            <th>Positive</th>
+                            <td>{{ sentiment_dict.positive }}%</td>
+                          </tr>
+                          <tr>
+                            <th>Negative</th>
+                            <td>{{ sentiment_dict.negative }}%</td>
+                          </tr>
+                          <tr>
+                            <th>Neutral</th>
+                            <td>{{ sentiment_dict.neutral }}%</td>
+                          </tr>
+                          </font>
+                        </table>
+                        <br>
+                        <font color="505356"> {{ sentiment_dict.size }} of Twitter's most relavent post containing '{{ searched_term.term }}' were analyzed to calculate sentiment scores.</font>
+                        <br>
+                      {% endif %}
                       </div>
 
                       </div>

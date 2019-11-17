@@ -7,10 +7,10 @@ from textblob import TextBlob
 class TwitterClient(object):
 	def __init__(self):
 
-		consumer_key = 'redacted'
-		consumer_secret = 'redacted'
-		access_token = 'redacted'
-		access_token_secret = 'redacted'
+		# consumer_key = 'redacted'
+		# consumer_secret = 'redacted'
+		# access_token = 'redacted'
+		# access_token_secret = 'redacted'
 
 		try:
 			self.auth = OAuthHandler(consumer_key, consumer_secret)
@@ -31,7 +31,7 @@ class TwitterClient(object):
 		else:
 			return 'negative'
 
-	def get_tweets(self, query, count = 50):
+	def get_tweets(self, query, count):
 		tweets = []
 		try:
 			fetched_tweets = self.api.search(q = query, count = count)
@@ -53,59 +53,32 @@ class TwitterClient(object):
 
 def main(search_term):
 	api = TwitterClient()
-	tweets = api.get_tweets(query = search_term, count = 10)
+	tweets = api.get_tweets(query = search_term, count = 200)
 
-	# ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
+	ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
 	# print("Positive tweets percentage: {} %".format(100*len(ptweets)/len(tweets)))
-	# ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 'negative']
+	ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 'negative']
 	# print("Negative tweets percentage: {} %".format(100*len(ntweets)/len(tweets)))
 	# print("Neutral tweets percentage: {} %".format(100*(len(tweets) - len(ntweets) - len(ptweets))/len(tweets)))
 
-	print("tweets collected: ", len(tweets))
-	tweet_dict2 = []
-	for tweet in tweets:
-		tweet_dict2.append(tweet['id'])
-	tweets_dict = (
-	{
-	    'id' : tweet_dict2[0],
-	    'index' : '1'
-	},
-	{
-	    'id' : tweet_dict2[1],
-	    'index' : '2'
-	},
-	{
-        'id' : tweet_dict2[2],
-	    'index' : '3'
-	},
-	{
-	    'id' : tweet_dict2[3],
-	    'index' : '4'
-	},
-	{
-	    'id' : tweet_dict2[4],
-	    'index' : '5'
-	},
-	{
-	    'id' : tweet_dict2[5],
-	    'index' : '6'
-	},
-	{
-	    'id' : tweet_dict2[6],
-	    'index' : '7'
-	},
-	{
-	    'id' : tweet_dict2[7],
-	    'index' : '8'
-	},
-	{
-	    'id' : tweet_dict2[8],
-	    'index' : '9'
-	},
-	{
-	    'id' : tweet_dict2[9],
-	    'index' : '10'
-	}
-	)
+	# print("tweets collected: ", len(tweets))
 
-	return tweets_dict
+	tweet_ids = []
+	sentiment_dict = {
+		'positive' : 100*len(ptweets)/len(tweets),
+		'negative' : 100*len(ntweets)/len(tweets),
+		'neutral' : 100*(len(tweets) - len(ntweets) - len(ptweets))/len(tweets),
+		'size' : len(tweets)
+	}
+	for tweet in tweets:
+		tweet_ids.append(tweet['id'])
+
+	tweets_dict = []
+	for i in range(0, len(tweet_ids)):
+		tweet = {}
+		tweet['id'] = tweet_ids[i]
+		tweet['index'] = i+1
+		tweets_dict.append(tweet)
+
+
+	return (tuple(tweets_dict), sentiment_dict)
