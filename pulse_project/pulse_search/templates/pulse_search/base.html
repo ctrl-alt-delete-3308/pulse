@@ -35,7 +35,7 @@ function searched(){
             {% endif %}
             <a href="{% url 'pulse-about' %}">about pulse</a>
             <a href="{% url 'pulse-team' %}">our team</a>
-            {% if user.username == 'rhetthanscom' %}
+            {% if user.username == 'rhetthanscom' or user.username == 'kennyschader' user.username == 'michael' %}
               <a href="http://localhost:8000/admin/">admin</a>
             {% endif %}
           </div>
