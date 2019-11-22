@@ -13,7 +13,6 @@ class TwitterClient(object):
 		# access_token_secret = 'redacted'
 
 
-
 		try:
 			self.auth = OAuthHandler(consumer_key, consumer_secret)
 			self.auth.set_access_token(access_token, access_token_secret)
