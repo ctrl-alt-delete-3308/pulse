@@ -55,6 +55,19 @@ class TwitterClient(object):
 def main(search_term):
 	api = TwitterClient()
 	tweets = api.get_tweets(query = search_term, count = 200)
+	if (len(tweets) == 0):
+		sentiment_dict = {
+			'positive' : -1,
+			'negative' : 0,
+			'neutral' : 0,
+			'size' : 0
+		}
+		tweets_dict = []
+		tweet = {}
+		tweet['id'] = -1
+		tweet['index'] = -1
+		tweets_dict.append(tweet)
+		return (tuple(tweets_dict), sentiment_dict)
 
 	ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
 	# print("Positive tweets percentage: {} %".format(100*len(ptweets)/len(tweets)))

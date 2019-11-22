@@ -9,6 +9,7 @@
     <p class = "center">
       <img src="http://127.0.0.1:8000/media/logo.png" alt="pulse logo" width="300" height="auto">
     </p>
+    <!-- <p class = "center" style = "font-family:allerta; font-size:26px;"> -->
     <p class = "center" style = "font-family:allerta; font-size:26px;">
              {% if searched_term %}
                 <font color="505356"> searched for '{{ searched_term.term }}'</font>
@@ -22,9 +23,19 @@
                   <div class="card bg-light text-dark">
                     <div class="card-header">Twitter</div><div class="card-body">
 <script>var j = 1; </script>
+<!-- <script>
+  var temp = tweet{{tweet.index}};
+  if(temp != -1){
+    <div id="tweet{{tweet.index}}" tweetID={{tweet.id}}></div>
+  }
+</script> -->
 <body>
   {% for tweet in tweets_dict %}
+    {% if not tweet.index == -1 %}
     <div id="tweet{{tweet.index}}" tweetID={{tweet.id}}></div>
+    {% else %}
+    Twitter returned no results for the term '{{ searched_term.term }}'.
+    {% endif %}
   {% endfor %}
   <script sync src="https://platform.twitter.com/widgets.js"></script>
   <script sync src="https://platform.twitter.com/widgets.js"></script>
@@ -49,7 +60,7 @@
   </script>
     <style>
     .scroll {
-          max-height: 650px;
+          max-height: 720px;
           overflow-y: auto;
       }
     </style>
@@ -80,7 +91,7 @@
                 <div class="col-lg-3 scroll">
                   <div class="card bg-light text-dark">
                     <div class="card-header">YouTube</div><div class="card-body">
-                      <iframe width="400" height="300" src="{{ video.url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      <iframe width="400" height="300" src="https://www.youtube.com/embed/qSfRQl2yADs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                       <br>
                       <iframe width="400" height="300" src="https://www.youtube.com/embed/-zP68LagUzY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                       <br>
@@ -99,47 +110,53 @@
                     <div class="card-header">Analytics</div><div class="card-body">
                       <!-- <img src="https://lh3.googleusercontent.com/g0Jw-I6-gH2DVCpnl3u8QKZVT_meR9lcJlpyeSZ-MyvwLnyEZvgyrY5frldA8HCv55s=w280" alt="pie chart" width="400" height="auto"> -->
                       {% if sentiment_dict %}
-                        <canvas id="pie-chart" width="400" height="200"></canvas>
-                        <script>
-                              new Chart(document.getElementById("pie-chart"), {
-                              type: 'pie',
-                              data: {
-                                labels: ["Positive", "Negative", "Neutral"],
-                                datasets: [{
-                                  label: "Tweet Sentiment",
-                                  backgroundColor: ["#3e95cd","#c45850","#aab7b8"],
-                                  data: [{{sentiment_dict.positive}},
-                                        {{sentiment_dict.negative}},
-                                        {{ sentiment_dict.neutral }}]
-                                }]
-                              },
-                              options: {
-                                title: {
-                                  display: true,
-                                  text: 'Tweet Sentiment Analysis'
+                        {% if not sentiment_dict.positive  == -1 %}
+                          <canvas id="pie-chart" width="400" height="200"></canvas>
+                          <script>
+                                new Chart(document.getElementById("pie-chart"), {
+                                type: 'pie',
+                                data: {
+                                  labels: ["Positive", "Negative", "Neutral"],
+                                  datasets: [{
+                                    label: "Tweet Sentiment",
+                                    backgroundColor: ["#3e95cd","#c45850","#aab7b8"],
+                                    data: [{{sentiment_dict.positive}},
+                                          {{sentiment_dict.negative}},
+                                          {{ sentiment_dict.neutral }}]
+                                  }]
+                                },
+                                options: {
+                                  title: {
+                                    display: true,
+                                    text: 'Tweet Sentiment Analysis'
+                                  }
                                 }
-                              }
-                          });
-                        </script>
-                        <table class="table">
-                          <font color="505356">
-                          <tr>
-                            <th>Positive</th>
-                            <td>{{ sentiment_dict.positive }}%</td>
-                          </tr>
-                          <tr>
-                            <th>Negative</th>
-                            <td>{{ sentiment_dict.negative }}%</td>
-                          </tr>
-                          <tr>
-                            <th>Neutral</th>
-                            <td>{{ sentiment_dict.neutral }}%</td>
-                          </tr>
-                          </font>
-                        </table>
+                            });
+                          </script>
+                          <table class="table">
+                            <font color="505356">
+                            <tr>
+                              <th>Positive</th>
+                              <td>{{ sentiment_dict.positive }}%</td>
+                            </tr>
+                            <tr>
+                              <th>Negative</th>
+                              <td>{{ sentiment_dict.negative }}%</td>
+                            </tr>
+                            <tr>
+                              <th>Neutral</th>
+                              <td>{{ sentiment_dict.neutral }}%</td>
+                            </tr>
+                            </font>
+                          </table>
+                          <br>
+                          <font color="505356"> {{ sentiment_dict.size }} of Twitter's most relavent post containing '{{ searched_term.term }}' were analyzed to calculate sentiment scores.</font>
+                          <br>
+                        {% else %}
                         <br>
-                        <font color="505356"> {{ sentiment_dict.size }} of Twitter's most relavent post containing '{{ searched_term.term }}' were analyzed to calculate sentiment scores.</font>
+                        <font color="505356"> {{ sentiment_dict.size }} relavent post containing '{{ searched_term.term }}' were generated by Twitter. No analytics can be generated with this little information. </font>
                         <br>
+                        {% endif %}
                       {% endif %}
                       </div>
 
