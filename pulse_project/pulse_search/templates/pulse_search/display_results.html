@@ -2,73 +2,66 @@
 {% extends "pulse_search/base.html" %}
 {% load static %}
 {% block content %}
+<style>
+.scroll {
+      max-height: 720px;
+      overflow-y: auto;
+  }
+</style>
 <script src='https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js'></script>
 <link rel="stylesheet" type="text/css" href="{% static 'pulse_search/scroll_card.css' %}">
 <title>Pulse Search</title>
 <div class="mx-auto" style="width:98%">
-    <p class = "center">
+    <p class = "center" style = "font-size:26px;">
       <img src="http://127.0.0.1:8000/media/logo.png" alt="pulse logo" width="300" height="auto">
-    </p>
-    <!-- <p class = "center" style = "font-family:allerta; font-size:26px;"> -->
-    <p class = "center" style = "font-family:allerta; font-size:26px;">
-             {% if searched_term %}
-                <font color="505356"> searched for '{{ searched_term.term }}'</font>
-            {% else %}
-              <font color="505356"> searched for 'search_term'</font>
-            {% endif%}
+      <br>
+         {% if searched_term %}
+            <font color="505356"> searched for '{{ searched_term.term }}'</font>
+        {% else %}
+          <font color="505356"> searched for 'search_term'</font>
+        {% endif %}
       </p>
 
+<!-- TWITTER -->
                 <div class="row">
                 <div class="col-lg-3 scroll">
                   <div class="card bg-light text-dark">
                     <div class="card-header">Twitter</div><div class="card-body">
-<script>var j = 1; </script>
-<!-- <script>
-  var temp = tweet{{tweet.index}};
-  if(temp != -1){
-    <div id="tweet{{tweet.index}}" tweetID={{tweet.id}}></div>
-  }
-</script> -->
-<body>
-  {% for tweet in tweets_dict %}
-    {% if not tweet.index == -1 %}
-    <div id="tweet{{tweet.index}}" tweetID={{tweet.id}}></div>
-    {% else %}
-    Twitter returned no results for the term '{{ searched_term.term }}'.
-    {% endif %}
-  {% endfor %}
-  <script sync src="https://platform.twitter.com/widgets.js"></script>
-  <script sync src="https://platform.twitter.com/widgets.js"></script>
+                      <script>var j = 1; </script>
+                      <body>
+                        {% for tweet in tweets_dict %}
+                          {% if not tweet.index == -1 %}
+                            <div id="tweet{{tweet.index}}" tweetID={{tweet.id}}></div>
+                          {% else %}
+                            Twitter returned no results for the term '{{ searched_term.term }}'.
+                          {% endif %}
+                        {% endfor %}
+                        <script sync src="https://platform.twitter.com/widgets.js"></script>
+                        <script sync src="https://platform.twitter.com/widgets.js"></script>
 
-  <script>
+                        <script>
 
-  window.onload = (function(){
-    {% for tweet in tweets_dict %}
-      var tweet{{tweet.index}} = document.getElementById("tweet{{tweet.index}}");
-      var id{{tweet.index}} = tweet{{tweet.index}}.getAttribute("tweetID");
-      twttr.widgets.createTweet(
-        id{{tweet.index}}, tweet{{tweet.index}},
-        {
-          conversation : 'none',
-          cards        : 'hidden',
-          linkColor    : '#cc0000',
-          theme        : 'light'
-        })
-    {% endfor %}
+                        window.onload = (function(){
+                          {% for tweet in tweets_dict %}
+                            var tweet{{tweet.index}} = document.getElementById("tweet{{tweet.index}}");
+                            var id{{tweet.index}} = tweet{{tweet.index}}.getAttribute("tweetID");
+                            twttr.widgets.createTweet(
+                              id{{tweet.index}}, tweet{{tweet.index}},
+                              {
+                                conversation : 'none',
+                                cards        : 'hidden',
+                                linkColor    : '#cc0000',
+                                theme        : 'light'
+                              })
+                          {% endfor %}
 
-  });
-  </script>
-    <style>
-    .scroll {
-          max-height: 720px;
-          overflow-y: auto;
-      }
-    </style>
-
+                        });
+                        </script>
                       </div>
                       </div>
                 </div>
 
+<!-- REDDIT -->
                 <div class="col-lg-3 scroll">
                   <div class="card bg-light text-dark">
                     <div class="card-header">Reddit</div><div class="card-body">
@@ -88,6 +81,7 @@
                       </div>
                 </div>
 
+<!-- YOUTUBE -->
                 <div class="col-lg-3 scroll">
                   <div class="card bg-light text-dark">
                     <div class="card-header">YouTube</div><div class="card-body">
@@ -105,6 +99,7 @@
                       </div>
                 </div>
 
+<!-- ANALYTICS -->
                 <div class="col-lg-3 scroll">
                   <div class="card bg-light text-dark">
                     <div class="card-header">Analytics</div><div class="card-body">
