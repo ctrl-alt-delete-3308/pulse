@@ -1,3 +1,4 @@
+import os
 import sys
 import re
 import tweepy
@@ -7,10 +8,10 @@ from textblob import TextBlob
 class TwitterClient(object):
 	def __init__(self):
 
-		# consumer_key = 'redacted'
-		# consumer_secret = 'redacted'
-		# access_token = 'redacted'
-		# access_token_secret = 'redacted'
+		consumer_key = os.environ.get('PULSE_TWITTER_CONSUMER_KEY', False)
+		consumer_secret = os.environ.get('PULSE_TWITTER_CONSUMER_SECRET', False)
+		access_token = os.environ.get('PULSE_TWITTER_ACCESS_TOKEN', False) 
+		access_token_secret = os.environ.get('PUSLE_TWITTER_ACCESS_TOKEN_SECRET', False)
 
 
 		try:
