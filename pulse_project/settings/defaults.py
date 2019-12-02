@@ -8,13 +8,10 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
-
-Note from the Pulse developers: Thank you to Mozilla for
-providing the following guide on migrating to production:
-https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Deployment
 """
 
 import os
+from defaults import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,13 +21,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get(
-    'DJANGO_SECRET_KEY',
-    '3^o!0%i%xl$n@1v8cq2bu_zms=(zjp+f*5bo6587z9zutuuu73'
-)
+SECRET_KEY = '3^o!0%i%xl$n@1v8cq2bu_zms=(zjp+f*5bo6587z9zutuuu73'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -136,7 +130,7 @@ LOGIN_URL = 'login'
 
 #ADDED
 STATICFILES_DIRS = [
-os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
