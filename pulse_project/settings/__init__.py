@@ -4,4 +4,4 @@ Settings module for Pulse Project.
 
 Loads development settings by default.
 """
-from dev import *
+from .dev import *
