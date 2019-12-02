@@ -1,0 +1,13 @@
+language: python
+python:
+- '3.7'
+install:
+- pip install pipenv
+- pipenv install --deploy
+script:
+- python manage.py test
+deploy:
+  provider: heroku
+  api_key:
+    secure: ZxTqfMi/c5g+lU9AH+dReQ9N2j+kau0z47ITVooGc6GhTalX3MVwQxuaI6/NXWW1M8Zisz063XkmKU0QIwLc9y04mfr1Olq3f81f7eA+T6lQOGB6N2fH2S+JAbcKXbOcK3yTKx8HKeI6OerS0KHeSw8fPNz8WXQ86ktlzoDXbd/33NO6khkiiYfj1/J91GNFtIPHTrJ31TgjRebLWqt9VKnCbVdlTKWsXYeMyIqBMkFfymCRRwm67OUDURw+NuxFg7dWKpF5O/9Rhb4FGZ2/WSrMuJ9x1bvnahut0abtKH2weSQ3nHOUAvQ+Nx0BBpPp/BDhDqFsiCqzxI3odqUR4Z41nWul/C3xqircMKcnRCZJRL1+9r6I6QgCUy6wLmfudcj5ITygny7Sd7K3Zd5xNLqK2sw9ajD8OfZkuwrPRGrwaKfXJ9gcyRFpSs3eIq+0XmEVP8D4cslj6990ey7XU0kXuudgVf7/bvMZKcAAnqFgsJV7O9f4AY06BAtxv2HwCKWfRUclD5lFA1RM4TXWoamzlbxmyFoXnNtRCTuJqyE4+aFXrZ0u7+Zj3tefJjw3QiqmUBk6py+kgpmIzqGIGucX+wOZTG0bTbY43PDd52mCrBziupSjfqqry/zY0UaiCHosOerXkIvZH2YPatzh5wZ4ycoH9WJln6do5MB38sM=
+  app: csci-3308-pulse
