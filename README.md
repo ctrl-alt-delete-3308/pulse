@@ -1,5 +1,7 @@
 # Pulse
 
+[![Build Status](https://travis-ci.com/ctrl-alt-delete-3308/pulse.svg?branch=master)](https://travis-ci.com/ctrl-alt-delete-3308/pulse)
+
 Providing unified keyword search across major social media platforms,
 *Pulse* empowers users to understand the Internet's opinion. Built
 on [Django](https://www.djangoproject.com/), continually deployed on
