@@ -16,8 +16,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'csci-3308-pulse.herokuapp.com', '127.0.0.1',
-    'www.pulseproject.app'
+    'csci-3308-pulse-stage.herokuapp.com', 'csci-3308-pulse.herokuapp.com', '127.0.0.1'
 ]
 
 ADMINS = (
