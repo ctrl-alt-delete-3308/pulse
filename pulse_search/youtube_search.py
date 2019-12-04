@@ -31,6 +31,7 @@ def main(user_input):
 
     for item in response['items']: # use the list of items found on Youtube to
         url_list.append(url + item['id']['videoId']) # append urls to url_list &
+        url_list.append(url + item['id'].get('videoId','')) # append urls to url_list &
         num_found += 1                               # count number of videos
 
     youtube_dict = [] # create a youtube dictionary for return
