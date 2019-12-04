@@ -1,162 +1,185 @@
-
 {% extends "pulse_search/base.html" %}
 {% load static %}
 {% block content %}
-<style>
-.scroll {
-      max-height: 720px;
-      overflow-y: auto;
-  }
-</style>
 <script src='https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js'></script>
+<script sync src="https://platform.twitter.com/widgets.js"></script>
+<script async src="//embed.redditmedia.com/widgets/platform.js" charset="UTF-8"></script>
+
 <link rel="stylesheet" type="text/css" href="{% static 'pulse_search/scroll_card.css' %}">
 <title>Pulse Search</title>
+<body>
 <div class="mx-auto" style="width:98%">
-    <p class = "center" style = "font-size:26px;">
-      <img src="http://127.0.0.1:8000/media/logo.png" alt="pulse logo" width="300" height="auto">
-      <br>
-         {% if searched_term %}
-            <font color="505356"> searched for '{{ searched_term.term }}'</font>
-        {% else %}
-          <font color="505356"> searched for 'search_term'</font>
-        {% endif %}
-      </p>
-
+  <p class = "center">
+    <img src="http://127.0.0.1:8000/media/logo.png" alt="pulse logo" width="300" height="auto">
+  </p>
+  <p class = "center" style = "font-family:allerta; font-size:26px;">
+          {% if searched_term %}
+              <font color="505356"> searched for '{{ searched_term.term }}'</font>
+          {% else %}
+            <font color="505356"> searched for 'search_term'</font>
+          {% endif%}
+  </p>
+  <div class="row">
 <!-- TWITTER -->
-                <div class="row">
-                <div class="col-lg-3 scroll">
-                  <div class="card bg-light text-dark">
-                    <div class="card-header">Twitter</div><div class="card-body">
-                      <script>var j = 1; </script>
-                      <body>
-                        {% for tweet in tweets_dict %}
-                          {% if not tweet.index == -1 %}
-                            <div id="tweet{{tweet.index}}" tweetID={{tweet.id}}></div>
-                          {% else %}
-                            Twitter returned no results for the term '{{ searched_term.term }}'.
-                          {% endif %}
-                        {% endfor %}
-                        <script sync src="https://platform.twitter.com/widgets.js"></script>
-                        <script sync src="https://platform.twitter.com/widgets.js"></script>
+    <div class="col-lg-3 scroll">
+      <div class="card bg-light text-dark">
 
-                        <script>
+        <div class="card-header">
+          Twitter
+        </div>
 
-                        window.onload = (function(){
-                          {% for tweet in tweets_dict %}
-                            var tweet{{tweet.index}} = document.getElementById("tweet{{tweet.index}}");
-                            var id{{tweet.index}} = tweet{{tweet.index}}.getAttribute("tweetID");
-                            twttr.widgets.createTweet(
-                              id{{tweet.index}}, tweet{{tweet.index}},
-                              {
-                                conversation : 'none',
-                                cards        : 'hidden',
-                                linkColor    : '#cc0000',
-                                theme        : 'light'
-                              })
-                          {% endfor %}
+        <div class="card-body">
+          {% for tweet in tweets_dict %}
+            <div id="tweet{{tweet.index}}" tweetID={{tweet.id}}></div>
+          {% endfor %}
 
-                        });
-                        </script>
-                      </div>
-                      </div>
-                </div>
+          <script>
+            window.onload = (function(){
 
+              {% for tweet in tweets_dict %}
+                var tweet{{tweet.index}} = document.getElementById("tweet{{tweet.index}}");
+                var id{{tweet.index}} = tweet{{tweet.index}}.getAttribute("tweetID");
+                twttr.widgets.createTweet(
+                  id{{tweet.index}}, tweet{{tweet.index}},
+                  {
+                    conversation : 'none',
+                    cards        : 'hidden',
+                    linkColor    : '#cc0000',
+                    theme        : 'light'
+                  })
+              {% endfor %}
+
+              // Populate Reddit card /////////////////////////////////////////////////////////////////////////////////
+              var embed_string = ""; // stores the string of HTML code that will embed the youtube videos
+
+              {% for post in reddit_dict %} // create html for embedding each video from youtube dictionary
+                embed_string += "<blockquote class=\"reddit-card\" data-card-created=\"1575156273\">";
+                embed_string +=   "<a href=\"";
+                embed_string +=     "{{post.url}}" + "\">";
+                embed_string +=     "{{post.title}}";
+                embed_string +=   "</a>";
+                embed_string +=     " from ";
+                embed_string +=   "<a href=\"http:\/\/www.reddit.com/r/europe\">";
+                embed_string +=     "{{post.subreddit}}";
+                embed_string +=   "</a>";
+                embed_string += "</blockquote>";
+              {% endfor %}
+
+              embed_string += "<script async src=\"\/\/embed.redditmedia.com/widgets/platform.js\" charset=\"UTF-8\"><\/script>";
+              console.log(embed_string);
+
+              if (embed_string != "") { // check to make sure that there are more than 0 search results
+                  document.getElementById("reddit_card").innerHTML = embed_string; // embed posts using html string
+              }
+
+              // Populate Youtube card ////////////////////////////////////////////////////////////////////////////////
+              embed_string = ""; // stores the string of HTML code that will embed the youtube videos
+
+              {% for video in youtube_dict %} // create html for embedding each video from youtube dictionary
+                embed_string += "<div class=\"embed-responsive embed-responsive-21by9\">";
+                embed_string +=   "<iframe class=\"embed-responsive-item\" src=\"" + "{{video.url}}" + "\"></iframe>";
+                embed_string += "</div>";
+                embed_string += "</p>";
+              {% endfor %}
+
+              if (embed_string != "") { // check to make sure that there are more than 0 search results
+                  document.getElementById("youtube_card").innerHTML = embed_string; // embed videos using html string
+              }
+            });
+          </script>
+          <style>
+            .scroll {
+                  max-height: 650px;
+                  overflow-y: auto;
+              }
+          </style>
+        </div>
+      </div>
+    </div>
 <!-- REDDIT -->
-                <div class="col-lg-3 scroll">
-                  <div class="card bg-light text-dark">
-                    <div class="card-header">Reddit</div><div class="card-body">
-                      <script src='https://redditjs.com/post.js' data-url='http://www.reddit.com/r/technology/comments/2m2yl7/its_now_official_humanity_has_landed_a_probe_on_a/' data-height='250' data-width='400' data-post-finder='mostComments' data-theme='light' data-show-submit='true'></script>
+    <div class="col-lg-3 scroll">
+      <div class="card bg-light text-dark">
 
-                      <script src='https://redditjs.com/post.js' data-url='https://www.reddit.com/r/news/comments/durw8g/marijuana_banned_from_chicago_public_housing/?utm_source=share&utm_medium=web2x' data-height='330' data-width='400' data-post-finder='mostComments' data-theme='light' data-show-submit='true'></script>
-                      <script src='https://redditjs.com/post.js' data-url='http://www.techodrom.com/etc/star-trek-edges-closer-reality-tractor-beam-moves-object-using-nothing-power-ultrasound/' data-height='330' data-width='400' data-post-finder='mostComments' data-theme='light' data-show-submit='true'></script>
-                      <script src='https://redditjs.com/post.js' data-url='http://www.techodrom.com/etc/star-trek-edges-closer-reality-tractor-beam-moves-object-using-nothing-power-ultrasound/' data-height='330' data-width='400' data-post-finder='mostComments' data-theme='light' data-show-submit='true'></script>
-                      <script src='https://redditjs.com/post.js' data-url='http://www.techodrom.com/etc/star-trek-edges-closer-reality-tractor-beam-moves-object-using-nothing-power-ultrasound/' data-height='330' data-width='400' data-post-finder='mostComments' data-theme='light' data-show-submit='true'></script>
-                      <script src='https://redditjs.com/post.js' data-url='http://www.techodrom.com/etc/star-trek-edges-closer-reality-tractor-beam-moves-object-using-nothing-power-ultrasound/' data-height='330' data-width='400' data-post-finder='mostComments' data-theme='light' data-show-submit='true'></script>
-                      <script src='https://redditjs.com/post.js' data-url='http://www.techodrom.com/etc/star-trek-edges-closer-reality-tractor-beam-moves-object-using-nothing-power-ultrasound/' data-height='330' data-width='400' data-post-finder='mostComments' data-theme='light' data-show-submit='true'></script>
-                      <script src='https://redditjs.com/post.js' data-url='http://www.techodrom.com/etc/star-trek-edges-closer-reality-tractor-beam-moves-object-using-nothing-power-ultrasound/' data-height='330' data-width='400' data-post-finder='mostComments' data-theme='light' data-show-submit='true'></script>
-                      <script src='https://redditjs.com/post.js' data-url='http://www.techodrom.com/etc/star-trek-edges-closer-reality-tractor-beam-moves-object-using-nothing-power-ultrasound/' data-height='330' data-width='400' data-post-finder='mostComments' data-theme='light' data-show-submit='true'></script>
-                      <script src='https://redditjs.com/post.js' data-url='http://www.techodrom.com/etc/star-trek-edges-closer-reality-tractor-beam-moves-object-using-nothing-power-ultrasound/' data-height='330' data-width='400' data-post-finder='mostComments' data-theme='light' data-show-submit='true'></script>
+        <div class="card-header">
+          Reddit
+        </div>
+        <div class="card-body", id="reddit_card">
+          No posts have been found.
+        </div>
 
-                    </div>
-                      </div>
-                </div>
-
+      </div>
+    </div>
 <!-- YOUTUBE -->
-                <div class="col-lg-3 scroll">
-                  <div class="card bg-light text-dark">
-                    <div class="card-header">YouTube</div><div class="card-body">
-                      <iframe width="400" height="300" src="https://www.youtube.com/embed/qSfRQl2yADs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                      <br>
-                      <iframe width="400" height="300" src="https://www.youtube.com/embed/-zP68LagUzY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                      <br>
-                      <iframe width="400" height="300" src="https://www.youtube.com/embed/38hMYtaCINI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                      <br>
-                      <iframe width="400" height="300" src="https://www.youtube.com/embed/YzhSyAb_2Uc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                      <br>
-                      <iframe width="400" height="300" src="https://www.youtube.com/embed/5texwfuSkT4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                      <br>
-                    </div>
-                      </div>
-                </div>
+    <div class="col-lg-3 scroll">
+      <div class="card bg-light text-dark">
 
+        <div class="card-header">
+          YouTube
+        </div>
+        <div class="card-body", id="youtube_card">
+          No videos have been found.
+        </div>
+      </div>
+    </div>
 <!-- ANALYTICS -->
-                <div class="col-lg-3 scroll">
-                  <div class="card bg-light text-dark">
-                    <div class="card-header">Analytics</div><div class="card-body">
-                      <!-- <img src="https://lh3.googleusercontent.com/g0Jw-I6-gH2DVCpnl3u8QKZVT_meR9lcJlpyeSZ-MyvwLnyEZvgyrY5frldA8HCv55s=w280" alt="pie chart" width="400" height="auto"> -->
-                      {% if sentiment_dict %}
-                        {% if not sentiment_dict.positive  == -1 %}
-                          <canvas id="pie-chart" width="400" height="200"></canvas>
-                          <script>
-                                new Chart(document.getElementById("pie-chart"), {
-                                type: 'pie',
-                                data: {
-                                  labels: ["Positive", "Negative", "Neutral"],
-                                  datasets: [{
-                                    label: "Tweet Sentiment",
-                                    backgroundColor: ["#3e95cd","#c45850","#aab7b8"],
-                                    data: [{{sentiment_dict.positive}},
-                                          {{sentiment_dict.negative}},
-                                          {{ sentiment_dict.neutral }}]
-                                  }]
-                                },
-                                options: {
-                                  title: {
-                                    display: true,
-                                    text: 'Tweet Sentiment Analysis'
-                                  }
-                                }
-                            });
-                          </script>
-                          <table class="table">
-                            <font color="505356">
-                            <tr>
-                              <th>Positive</th>
-                              <td>{{ sentiment_dict.positive }}%</td>
-                            </tr>
-                            <tr>
-                              <th>Negative</th>
-                              <td>{{ sentiment_dict.negative }}%</td>
-                            </tr>
-                            <tr>
-                              <th>Neutral</th>
-                              <td>{{ sentiment_dict.neutral }}%</td>
-                            </tr>
-                            </font>
-                          </table>
-                          <br>
-                          <font color="505356"> {{ sentiment_dict.size }} of Twitter's most relavent post containing '{{ searched_term.term }}' were analyzed to calculate sentiment scores.</font>
-                          <br>
-                        {% else %}
-                        <br>
-                        <font color="505356"> {{ sentiment_dict.size }} relavent post containing '{{ searched_term.term }}' were generated by Twitter. No analytics can be generated with this little information. </font>
-                        <br>
-                        {% endif %}
-                      {% endif %}
-                      </div>
-
-                      </div>
-                </div>
-                </div>
-            </div>
+      <div class="col-lg-3 scroll">
+        <div class="card bg-light text-dark">
+          <div class="card-header">Analytics</div><div class="card-body">
+            <!-- <img src="https://lh3.googleusercontent.com/g0Jw-I6-gH2DVCpnl3u8QKZVT_meR9lcJlpyeSZ-MyvwLnyEZvgyrY5frldA8HCv55s=w280" alt="pie chart" width="400" height="auto"> -->
+            {% if sentiment_dict %}
+              {% if not sentiment_dict.positive  == -1 %}
+                <canvas id="pie-chart" width="400" height="200"></canvas>
+                <script>
+                      new Chart(document.getElementById("pie-chart"), {
+                      type: 'pie',
+                      data: {
+                        labels: ["Positive", "Negative", "Neutral"],
+                        datasets: [{
+                          label: "Tweet Sentiment",
+                          backgroundColor: ["#3e95cd","#c45850","#aab7b8"],
+                          data: [{{sentiment_dict.positive}},
+                                {{sentiment_dict.negative}},
+                                {{ sentiment_dict.neutral }}]
+                        }]
+                      },
+                      options: {
+                        title: {
+                          display: true,
+                          text: 'Tweet Sentiment Analysis'
+                        }
+                      }
+                  });
+                </script>
+                <table class="table">
+                  <font color="505356">
+                  <tr>
+                    <th>Positive</th>
+                    <td>{{ sentiment_dict.positive }}%</td>
+                  </tr>
+                  <tr>
+                    <th>Negative</th>
+                    <td>{{ sentiment_dict.negative }}%</td>
+                  </tr>
+                  <tr>
+                    <th>Neutral</th>
+                    <td>{{ sentiment_dict.neutral }}%</td>
+                  </tr>
+                  </font>
+                </table>
+                <br>
+                <font color="505356"> {{ sentiment_dict.size }} of Twitter's most relavent post containing '{{ searched_term.term }}' were analyzed to calculate sentiment scores.</font>
+                <br>
+              {% else %}
+              <br>
+              <font color="505356"> {{ sentiment_dict.size }} relavent post containing '{{ searched_term.term }}' were generated by Twitter. No analytics can be generated with this little information. </font>
+              <br>
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
 {% endblock content %}
+
