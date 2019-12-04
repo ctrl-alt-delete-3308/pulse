@@ -10,7 +10,7 @@ class TwitterClient(object):
 
 		consumer_key = os.environ.get('PULSE_TWITTER_CONSUMER_KEY', False)
 		consumer_secret = os.environ.get('PULSE_TWITTER_CONSUMER_SECRET', False)
-		access_token = os.environ.get('PULSE_TWITTER_ACCESS_TOKEN', False) 
+		access_token = os.environ.get('PULSE_TWITTER_ACCESS_TOKEN', False)
 		access_token_secret = os.environ.get('PUSLE_TWITTER_ACCESS_TOKEN_SECRET', False)
 
 
@@ -55,7 +55,7 @@ class TwitterClient(object):
 
 def main(search_term):
 	api = TwitterClient()
-	tweets = api.get_tweets(query = search_term, count = 200)
+	tweets = api.get_tweets(query = search_term, count = 30)
 	if (len(tweets) == 0):
 		sentiment_dict = {
 			'positive' : -1,
