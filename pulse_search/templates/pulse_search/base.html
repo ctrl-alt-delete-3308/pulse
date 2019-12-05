@@ -30,8 +30,8 @@ function searched(){
           {% endif %}
           <a href="{% url 'pulse-about' %}">about pulse</a>
           <a href="{% url 'pulse-team' %}">our team</a>
-          {% if user.username == 'rhetthanscom' or user.username == 'kennyschader' or user.username == 'michael' %}
-            <a href="http://localhost:8000/admin/">admin</a>
+          {% if user.username == 'rhetthanscom' or user.username == 'kennyschader' or user.username == 'michael' or user.username == 'rdrew' %}
+            <a href="https://csci-3308-pulse.herokuapp.com/admin/">admin</a>
           {% endif %}
         </div>
         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776</span>
