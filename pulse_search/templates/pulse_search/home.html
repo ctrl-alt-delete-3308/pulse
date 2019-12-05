@@ -24,9 +24,10 @@
 
                   </div>
                   {% else %}
-                  <p class = "center" style = "font-family:allerta; font-size:26px;">
+                  <p class = "center" style = "font-size:20px;">
                     <font color="505356">
-                      please sign in to begin a search
+                      please <a href="{% url 'login' %}" style="color:black">sign in</a> to begin a search
+                      or learn more about our service on our <a href="{% url 'pulse-about' %}" style="color:black">about pulse</a> page.
                     </font>
                   </p>
 
