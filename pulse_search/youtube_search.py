@@ -9,7 +9,11 @@ def main(user_input):
 
     api_name = "youtube"                                 # use youtube api
     api_ver  = "v3"                                      # version 3
-    API_KEY  = "AIzaSyAjrL-bTZAQ9vQjsx_aCz2Xf93puSRN6Xo" # csci3308-pulse key
+    API_KEY  = os.getenv("PULSE_YOUTUBE_API_KEY", False) # csci3308-pulse key
+    if not API_KEY:
+        raise ValueError(
+            "Unable to get YouTube API key- is PULSE_YOUTUBE_API_KEY set?"
+        )
 
     # create object to use search and list below and store as "youtube"
     youtube = googleapiclient.discovery.build(api_name, api_ver, developerKey=API_KEY)
@@ -30,9 +34,9 @@ def main(user_input):
     num_found = 0 # will count the number of videos youtube search found
 
     for item in response['items']: # use the list of items found on Youtube to
-        url_list.append(url + item['id']['videoId']) # append urls to url_list &
-        url_list.append(url + item['id'].get('videoId','')) # append urls to url_list &
-        num_found += 1                               # count number of videos
+        if item['id']['kind'] == 'youtube#video':
+            url_list.append(url + item['id']['videoId']) # append urls to url_list &
+            num_found += 1                               # count number of videos
 
     youtube_dict = [] # create a youtube dictionary for return
 

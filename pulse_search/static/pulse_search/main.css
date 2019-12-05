@@ -1,17 +1,19 @@
-#grad_background{
-    /* height: 4000px; */
-    min-height: 100%;
-    min-width: 1024px;
-    width: 100%;
-    height: auto;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: linear-gradient(to top left, #669999 0%, #66ccff 100%)
+html {
+  margin: 0px;
+  height: 100%;
+  width: 100%;
 }
+
 body {
+  margin: 0px;
+  min-height: 100%;
+  width: 100%;
   font-family: "Lato", sans-serif;
+  background: linear-gradient(to top left, #669999 0%, #66ccff 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
+
 .padding-0{
   padding-right:0;
   padding-left:0;

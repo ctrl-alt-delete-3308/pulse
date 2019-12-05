@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import UserRegisterForm
 from django.contrib.auth.decorators import login_required
-# from users.models import Search
+from pulse_search.models import Search
 
 def register(request):
     if request.method == 'POST':
@@ -18,5 +18,7 @@ def register(request):
 
 @login_required
 def profile(request):
-    # context = {'tweets_dict' : Search.objects.all(username = user.username)}
-    return render(request, 'users/profile.html')
+    context = {
+        'searches': Search.objects.filter(author=request.user)
+    }
+    return render(request, 'users/profile.html', context=context)
