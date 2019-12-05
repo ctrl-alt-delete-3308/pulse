@@ -29,22 +29,14 @@
         {% if searches %}
           <br><br>
           <table class="table">
-          {% for search in searchs %}
             <tr>
+              <th>Date Searched</th>
               <th>Search Term</th>
-              <td> {{ search.term }}</td>
             </tr>
+          {% for search in searches %}
             <tr>
-              <th>Positive</th>
-              <td> {{ search.term }}</td>
-            </tr>
-            <tr>
-              <th>Negative</th>
-              <td> {{ search.term }}</td>
-            </tr>
-            <tr>
-              <th>Neutral</th>
-              <td> {{ search.term }}</td>
+              <td>{{ search.date_searched}}</td>
+              <td>{{ search.term }}</td>
             </tr>
           {% endfor %}
           </table>
