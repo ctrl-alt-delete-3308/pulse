@@ -1,4 +1,5 @@
 {% extends "pulse_search/base.html" %}
+{% load static %}
 {% block content %}
   <title>Pulse</title>
   <script>
@@ -10,7 +11,7 @@
             <div class="mx-auto" style="width:98%">
               <!-- <div class="center"> -->
               <p class = "center">
-              <img src="http://127.0.0.1:8000/media/logo.png" alt="pulse logo" width="400" height="auto"> </p>
+              <img src={% static "images/logo.png" %} alt="pulse logo" width="400" height="auto"> </p>
                 <div class="row">
 
                   {% if user.is_authenticated %}
