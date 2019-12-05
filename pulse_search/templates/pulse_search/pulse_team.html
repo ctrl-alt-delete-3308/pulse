@@ -1,13 +1,13 @@
-``{% extends "pulse_search/base.html" %}
+{% extends "pulse_search/base.html" %}
 {% block content %}
+{% load static %}
 <!-- centering -->
             <!-- <p class="margin_sizing"></p> -->
                 <!-- <div class="center"> -->
                 <title>Pulse Team</title>
               <div class="mx-auto" style="width:98%">
-                <!-- <div class="mx-auto" style="width:20%"><img src="http://127.0.0.1:8000/media/logo.png" alt="pulse logo" width="300" height="auto"></div> -->
                 <p class="h4 mb-4 text-center">
-                  <img src="http://127.0.0.1:8000/media/logo.png" alt="pulse logo" width="300" height="auto">
+                  <img src={% static "images/logo.png" %} alt="pulse logo" width="300" height="auto">
                 </p>
                 <p class="h4 mb-4 text-center" style = "font-family:allerta; font-size:26px;">
                    <font color="505356">meet the crew</font>
@@ -29,7 +29,7 @@
                     <div class="card card-cascade">
                           <!-- Card image -->
                           <div class="view view-cascade overlay">
-                            <img class="card-img-top" src="http://127.0.0.1:8000/media/rhett.png" alt="Card image cap">
+                            <img class="card-img-top" src={% static "pulse_search/images/rhett.png" %} alt="Card image cap">
                             <a>
                               <div class="mask rgba-white-slight"></div>
                             </a>
@@ -63,7 +63,7 @@
 
                       <!-- Card image -->
                       <div class="view view-cascade overlay">
-                        <img class="card-img-top" src="http://127.0.0.1:8000/media/ryan.jpg" alt="Card image cap">
+                        <img class="card-img-top" src={% static "/pulse_search/images/ryan.jpg" %} alt="Card image cap">
                         <a>
                           <div class="mask rgba-white-slight"></div>
                         </a>
@@ -98,7 +98,7 @@
 
                       <!-- Card image -->
                       <div class="view view-cascade overlay">
-                        <img class="card-img-top" src="http://127.0.0.1:8000/media/michael.jpg" alt="Card image cap">
+                        <img class="card-img-top" src={% static "pulse_search/images/michael.jpg" %}  alt="Card image cap">
                         <a>
                           <div class="mask rgba-white-slight"></div>
                         </a>
@@ -134,7 +134,7 @@
 
                       <!-- Card image -->
                       <div class="view view-cascade overlay">
-                        <img class="card-img-top" src="http://127.0.0.1:8000/media/kenny.jpg" alt="Card image cap">
+                        <img class="card-img-top" src={% static "/pulse_search/images/kenny.jpg" %} alt="Card image cap">
                         <a>
                           <div class="mask rgba-white-slight"></div>
                         </a>
