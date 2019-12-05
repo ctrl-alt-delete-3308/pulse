@@ -1,9 +1,13 @@
 import os
 import sys
 import re
+import logging
 import tweepy
 from tweepy import OAuthHandler
 from textblob import TextBlob
+
+logger = logging.getLogger('django').getChild(__name__)
+
 
 class TwitterClient(object):
     def __init__(self):
@@ -17,8 +21,8 @@ class TwitterClient(object):
             self.auth = OAuthHandler(consumer_key, consumer_secret)
             self.auth.set_access_token(access_token, access_token_secret)
             self.api = tweepy.API(self.auth)
-        except:
-            print("Error: Authentication Failed")
+        except Exception as e:
+            logger.exception("Error (authentication failed): " + str(e))
 
     def clean_tweet(self, tweet):
         return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
@@ -50,7 +54,7 @@ class TwitterClient(object):
             return tweets
 
         except tweepy.TweepError as e:
-            print("Error : " + str(e))
+            logger.exception("Error : " + str(e))
             return list()
 
 def main(search_term):
