@@ -10,65 +10,12 @@ logger = logging.getLogger('django').getChild(__name__)
 
 
 class TwitterClient(object):
-<<<<<<< HEAD
-	def __init__(self):
-
-		# consumer_key = os.environ.get('PULSE_TWITTER_CONSUMER_KEY', False)
-		# consumer_secret = os.environ.get('PULSE_TWITTER_CONSUMER_SECRET', False)
-		# access_token = os.environ.get('PULSE_TWITTER_ACCESS_TOKEN', False)
-		# access_token_secret = os.environ.get('PUSLE_TWITTER_ACCESS_TOKEN_SECRET', False)
-		consumer_key = 'bVgAX5fGidoy2IgPKHHgcfOG4'
-		consumer_secret = '83b6zN5HSIjPk7ALaGwcFY9DRwNEvOABgB0YD3TJI4KXigzJY9'
-		access_token = '48478289-5oNed2t3pcbO5aSt5DdeoeoOTfLUePQUYJ96tkkfd'
-		access_token_secret = 'VDOFj9IjC0r5QgbIu1kGgAp68fEwHjKLlhGJkBPFRNbXD'
-
-		try:
-			self.auth = OAuthHandler(consumer_key, consumer_secret)
-			self.auth.set_access_token(access_token, access_token_secret)
-			self.api = tweepy.API(self.auth)
-		except:
-			print("Error: Authentication Failed")
-
-	def clean_tweet(self, tweet):
-		return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
-
-	def get_tweet_sentiment(self, tweet):
-		analysis = TextBlob(self.clean_tweet(tweet))
-		if analysis.sentiment.polarity > 0:
-			return 'positive'
-		elif analysis.sentiment.polarity == 0:
-			return 'neutral'
-		else:
-			return 'negative'
-
-	def get_tweets(self, query, count):
-		tweets = []
-		try:
-			fetched_tweets = self.api.search(q = query, count = count)
-
-			for tweet in fetched_tweets:
-				parsed_tweet = {}
-				parsed_tweet['text'] = tweet.text
-				parsed_tweet['sentiment'] = self.get_tweet_sentiment(tweet.text)
-				parsed_tweet['id'] = tweet.id
-				if tweet.retweet_count > 0:
-					if parsed_tweet not in tweets:
-						tweets.append(parsed_tweet)
-				else:
-					tweets.append(parsed_tweet)
-			return tweets
-
-		except tweepy.TweepError as e:
-			print("Error : " + str(e))
-=======
     def __init__(self):
 
         consumer_key = os.environ.get('PULSE_TWITTER_CONSUMER_KEY', False)
         consumer_secret = os.environ.get('PULSE_TWITTER_CONSUMER_SECRET', False)
         access_token = os.environ.get('PULSE_TWITTER_ACCESS_TOKEN', False)
         access_token_secret = os.environ.get('PULSE_TWITTER_ACCESS_TOKEN_SECRET', False)
-
-            
 
         try:
             if False in (consumer_key, consumer_secret, access_token, access_token_secret):
@@ -112,7 +59,6 @@ class TwitterClient(object):
         except tweepy.TweepError as e:
             logger.exception("Error : " + str(e))
             return list()
->>>>>>> d1b68d5b667472a9fd960731aad436dc4eaa56fe
 
 def main(search_term):
     api = TwitterClient()
