@@ -17,8 +17,6 @@ class TwitterClient(object):
         access_token = os.environ.get('PULSE_TWITTER_ACCESS_TOKEN', False)
         access_token_secret = os.environ.get('PULSE_TWITTER_ACCESS_TOKEN_SECRET', False)
 
-            
-
         try:
             if False in (consumer_key, consumer_secret, access_token, access_token_secret):
                 raise ValueError("Unable to load twitter API creds- are environment variables set properly?")
