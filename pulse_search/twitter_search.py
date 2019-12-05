@@ -8,10 +8,14 @@ from textblob import TextBlob
 class TwitterClient(object):
 	def __init__(self):
 
-		consumer_key = os.environ.get('PULSE_TWITTER_CONSUMER_KEY', False)
-		consumer_secret = os.environ.get('PULSE_TWITTER_CONSUMER_SECRET', False)
-		access_token = os.environ.get('PULSE_TWITTER_ACCESS_TOKEN', False)
-		access_token_secret = os.environ.get('PUSLE_TWITTER_ACCESS_TOKEN_SECRET', False)
+		# consumer_key = os.environ.get('PULSE_TWITTER_CONSUMER_KEY', False)
+		# consumer_secret = os.environ.get('PULSE_TWITTER_CONSUMER_SECRET', False)
+		# access_token = os.environ.get('PULSE_TWITTER_ACCESS_TOKEN', False)
+		# access_token_secret = os.environ.get('PUSLE_TWITTER_ACCESS_TOKEN_SECRET', False)
+		consumer_key = 'bVgAX5fGidoy2IgPKHHgcfOG4'
+		consumer_secret = '83b6zN5HSIjPk7ALaGwcFY9DRwNEvOABgB0YD3TJI4KXigzJY9'
+		access_token = '48478289-5oNed2t3pcbO5aSt5DdeoeoOTfLUePQUYJ96tkkfd'
+		access_token_secret = 'VDOFj9IjC0r5QgbIu1kGgAp68fEwHjKLlhGJkBPFRNbXD'
 
 		try:
 			self.auth = OAuthHandler(consumer_key, consumer_secret)
