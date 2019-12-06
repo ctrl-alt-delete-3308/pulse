@@ -12,6 +12,8 @@ on [Django](https://www.djangoproject.com/), continually deployed on
 We currently support search on the following social media platforms:
 
 * Twitter
+* Reddit
+* YouTube
 
 ## Contributing
 
