@@ -7,11 +7,15 @@ Providing unified keyword search across major social media platforms,
 on [Django](https://www.djangoproject.com/), continually deployed on
 [Heroku](https://www.heroku.com).
 
+Visit Pulse [here](https://csci-3308-pulse.herokuapp.com/).
+
 ## What Platforms are Supported?
 
 We currently support search on the following social media platforms:
 
 * Twitter
+* Reddit
+* YouTube
 
 ## Contributing
 
