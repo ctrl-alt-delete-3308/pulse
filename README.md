@@ -35,3 +35,8 @@ functionality, including our search features, are located.
 
 This project is licensed under the MIT License. Please see the included
 `LICENSE.md` file in this repository.
+
+## Contact
+
+Feel free to reach out to one of the creators of Pulse, Rhett, at the following:
+rhha1623@colorado.edu
