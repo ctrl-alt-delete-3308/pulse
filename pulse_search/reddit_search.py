@@ -3,13 +3,24 @@
 # given the search term input by the user
 
 import os
+import logging
 import praw # import Python Wrapper for Reddit API
+
+logger = logging.getLogger('django').getChild(__name__)
 
 def main(user_input):
 
-    my_clientId = 'iQgXmlPdkBGR8g'              # personal use API key
-    my_secret   = '5IMOVyaBz0h9_pTVVpiBG3DX2Jc' # secret API key
-    my_agent    = 'Pulse'                       # csci3308-pulse key
+    # Personal use API
+    my_clientId = os.environ.get('PULSE_REDDIT_CLIENTID', False)   
+    # Secret API key
+    my_secret   = os.environ.get('PULSE_REDDIT_SECRET', False)   
+    my_agent    = os.environ.get('PULSE_REDDIT_USER_AGENT', False) 
+
+    if False in (my_clientId, my_secret, my_agent):
+        error_msg = "Unable to load Reddit API credentials- are" \
+            "environment variables set up properly?"
+        logger.error(error_msg)
+        raise ValueError(error_msg)
 
     # create object to use search/list below and store as "reddit"
     reddit = praw.Reddit(client_id     = my_clientId,
