@@ -62,7 +62,7 @@ class TwitterClient(object):
 
 def main(search_term):
     api = TwitterClient()
-    tweets = api.get_tweets(query = search_term, count = 10)
+    tweets = api.get_tweets(query = search_term, count = 50)
     if (len(tweets) == 0):
         sentiment_dict = {
             'positive' : -1,
